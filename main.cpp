@@ -137,12 +137,25 @@ tm GetNearestSaturday(tm& date) {
     return nearestSaturday;
 }
 
-//
+//函数：获取庆祝日期
 void get_cele_date(Person& P, int n)
 {
     
 }
 
+//函数：打印亲友信息
+void print_Person(vector<Person>& P)
+{
+    int n = P.size();
+    for (int i = 0; i < n; i++)
+    {
+        cout << "姓名：" << P[i].name << "\t关系：" << P[i].relation
+            << "\t出生年月：" << P[i].birth_year << "年" << P[i].birth_mon
+            << "月" << P[i].birth_day << "日\n";
+    }
+}
+
+//函数：录入亲友信息
 void main_1(vector<Person>& Persons)
 {
     system("cls");
@@ -154,6 +167,13 @@ void main_1(vector<Person>& Persons)
         cout << "(是请输入1，不是请输入0)\n";
         cin >> i;
     } while (i);
+}
+
+//函数：查询亲友信息
+void main_2(vector<Person>& P)
+{
+    print_Person(P);
+    system("pause");
 }
 
 int main()
@@ -176,6 +196,8 @@ int main()
             main_1(Persons);
             break;
         case 2:
+            main_2(Persons);
+            break;
         case 3:
         case 4:return 0;
         default:
