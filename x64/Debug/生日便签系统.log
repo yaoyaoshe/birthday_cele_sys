@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(3,30): warning C4081: 应输入“newline”；找到“;”
+  生日便签系统.vcxproj -> C:\VS   项目\生日便签系统\x64\Debug\生日便签系统.exe
