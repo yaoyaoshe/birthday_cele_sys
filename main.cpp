@@ -143,35 +143,46 @@ void get_cele_date(Person& P, int n)
     
 }
 
-
-int main_1()
+void main_1(vector<Person>& Persons)
 {
-    int res = 1;
-    cout << "欢迎使用生日聚会计划便签程序！\n";
-    cout << "输入亲友生日请按0，生成计划请按1（默认为1）：";
-    cin >> res;
-    cin.ignore();
-    return res;
-}
-
-void main_2(vector<Person>& Persons)
-{
-    int i = 1;
-    while (i)
+    system("cls");
+    int i = 0;
+    do
     {
         getpersoninfo(Persons);
-        cout << "是否继续输入信息：\n（继续请输入1，停止请输入0）：";
+        cout << "是否继续录入其他亲友信息？\n";
+        cout << "(是请输入1，不是请输入0)\n";
         cin >> i;
-    }
-
+    } while (i);
 }
 
 int main()
 {
     vector<Person>Persons;
-    int s_1 = main_1();
-    if (!s_1)
-        main_2(Persons);
+    while (1)
+    {
+        system("cls");
+        cout << "欢迎使用生日聚会计划便签程序！\n";
+        cout << "输入亲友信息请按1\n";
+        cout << "查看亲友信息请按2\n";
+        cout << "生成生日聚会计划请按3\n";
+        cout << "退出系统请按4\n";
+        int i;
+        cin >> i;
+
+        switch (i)
+        {
+        case 1:
+            main_1(Persons);
+            break;
+        case 2:
+        case 3:
+        case 4:return 0;
+        default:
+            break;
+        }
+    }
+
 }
 
 /*
