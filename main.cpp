@@ -5,6 +5,8 @@
 using namespace std;
 #pragma warning(disable:4996);
 
+void data_to_time_t(tm& data, time_t& t, int year, int mon, int day);
+
 //亲友类    wjc
 class Person
 {
@@ -51,6 +53,7 @@ void getpersoninfo(vector<Person>& Persons)
     cin >> rel;
     cout << "请输入该亲友的出生年月（年 月 日，以空格分隔）：";
     cin >> year >> mon >> day;
+    Persons.push_back(Person(rel, year, mon, day));
 }
 
 // 函数：获取下一个生日日期     wjc
@@ -123,6 +126,38 @@ tm GetNearestSaturday(tm& date) {
     return nearestSaturday;
 }
 
+
+int main_1()
+{
+    int res = 1;
+    cout << "欢迎使用生日聚会计划便签程序！\n";
+    cout << "输入亲友生日请按0，生成计划请按1（默认为1）：";
+    cin >> res;
+    cin.ignore();
+    return res;
+}
+
+void main_2(vector<Person>& Persons)
+{
+    int i = 1;
+    while (i)
+    {
+        getpersoninfo(Persons);
+        cout << "是否继续输入信息：\n（继续请输入1，停止请输入0）：";
+        cin >> i;
+    }
+
+}
+
+int main()
+{
+    vector<Person>Persons;
+    int s_1 = main_1();
+    if (!s_1)
+        main_2(Persons);
+}
+
+/*
 int main() {
     // 1. 欢迎界面     wdy
     std::cout << "欢迎使用生日聚会计划便签程序！请按任意键继续。\n";
@@ -190,4 +225,4 @@ int main() {
 
     return 0;
 }
-
+*/
