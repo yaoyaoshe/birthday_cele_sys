@@ -137,6 +137,12 @@ tm GetNearestSaturday(tm& date) {
     return nearestSaturday;
 }
 
+//获得一个亲友的生日聚会时间
+void get_cele_date(Person& P, int n)
+{
+
+}
+
 
 int main_1()
 {
