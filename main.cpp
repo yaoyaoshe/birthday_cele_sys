@@ -1,10 +1,11 @@
 #include <iostream>
 #include <ctime>
 #include<string>
+#include<vector>
 using namespace std;
 #pragma warning(disable:4996);
 
-//亲友类
+//亲友类    wjc
 class Person
 {
 public:
@@ -39,6 +40,18 @@ void data_to_time_t(tm& data, time_t& t, int year, int mon, int day)
     return;
 }
 
+//函数：获取亲友信息
+void getpersoninfo(vector<Person>& Persons)
+{
+    string rel;
+    int year;
+    int mon;
+    int day;
+    cout << "请输入您与该亲友的关系：";
+    cin >> rel;
+    cout << "请输入该亲友的出生年月（年 月 日，以空格分隔）：";
+    cin >> year >> mon >> day;
+}
 
 // 函数：获取下一个生日日期     wjc
 tm GetNextBirthday(const tm& today, const tm& birthday, time_t& nextBrithday_t) {
