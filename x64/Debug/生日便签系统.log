@@ -1,4 +1,7 @@
 ﻿  main.cpp
 C:\VS   项目\生日便签系统\生日便签系统\main.cpp(6,30): warning C4081: 应输入“newline”；找到“;”
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(149,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(196,21): warning C4101: “birthday_year”: 未引用的局部变量
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(196,50): warning C4101: “birthday_day”: 未引用的局部变量
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(196,36): warning C4101: “birthday_mon”: 未引用的局部变量
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(195,24): warning C4101: “birthday_t”: 未引用的局部变量
   生日便签系统.vcxproj -> C:\VS   项目\生日便签系统\x64\Debug\生日便签系统.exe

@@ -137,147 +137,130 @@ tm GetNearestSaturday(tm& date) {
     return nearestSaturday;
 }
 
-//函数：获取庆祝日期
 void get_cele_date(Person& P, int n)
 {
-    
+
 }
 
-//函数：打印亲友信息
-void print_Person(vector<Person>& P)
+int main_1()
 {
-    int n = P.size();
-    for (int i = 0; i < n; i++)
-    {
-        cout << "姓名：" << P[i].name << "\t关系：" << P[i].relation
-            << "\t出生年月：" << P[i].birth_year << "年" << P[i].birth_mon
-            << "月" << P[i].birth_day << "日\n";
-    }
+    int res = 1;
+    cout << "欢迎使用生日聚会计划便签程序！\n";
+    cout << "输入亲友生日请按0，生成计划请按1（默认为1）：";
+    cin >> res;
+    cin.ignore();
+    return res;
 }
 
-//函数：录入亲友信息
-void main_1(vector<Person>& Persons)
+void main_2(vector<Person>& Persons)
 {
-    system("cls");
-    int i = 0;
-    do
+    int i = 1;
+    while (i)
     {
         getpersoninfo(Persons);
-        cout << "是否继续录入其他亲友信息？\n";
-        cout << "(是请输入1，不是请输入0)\n";
+        cout << "是否继续输入信息：\n（继续请输入1，停止请输入0）：";
         cin >> i;
-    } while (i);
-}
-
-//函数：查询亲友信息
-void main_2(vector<Person>& P)
-{
-    print_Person(P);
-    system("pause");
-}
-
-void main_3(vector<Person>& P)
-{
+    }
 
 }
 
 int main()
 {
+    time_t nextBirthday_t;
+    int t;
+    string s;
     vector<Person>Persons;
-    while (1)
+    vector<Person>Persons_1;
+    int s_1 = main_1();
+    tm k[100];
+    if (!s_1)
+        main_2(Persons);
+    for (size_t i = 0; i < Persons.size(); ++i) {
+        cout << "姓名：" << Persons[i].name << endl;
+        cout << "关系：" << Persons[i].relation << endl;
+    }
+    cout << "是否要继续生成计划: \n（继续请输入1，停止请输入0）" << endl;
+    cin >> t;
+    if (t)
     {
-        system("cls");
-        cout << "欢迎使用生日聚会计划便签程序！\n";
-        cout << "输入亲友信息请按1\n";
-        cout << "查看亲友信息请按2\n";
-        cout << "生成生日聚会计划请按3\n";
-        cout << "退出系统请按4\n";
-        int i;
-        cin >> i;
-
-        switch (i)
+    loop1:
+        cout << "请输入生成计划的亲友名字" << endl;
+        cin >> s;
+        for (size_t i = 0; i < Persons.size(); i++)
         {
-        case 1:
-            main_1(Persons);
-            break;
-        case 2:
-            main_2(Persons);
-            break;
-        case 3:
-        case 4:return 0;
-        default:
-            break;
+            if (Persons[i].name == s)
+            {
+
+                tm birthday, today;
+                time_t birthday_t, today_t;
+                int birthday_year, birthday_mon, birthday_day;
+                //birthday_year = Persons[i].birth_year;
+                //birthday_mon = Persons[i].birth_mon;
+                //birthday_day = Persons[i].birth_day;
+                birthday = Persons[i].birthday;
+                std::cout << "请输入今天的日期（年 月 日，以空格分隔）：";
+                int today_year, today_mon, today_day;
+                std::cin >> today_year >> today_mon >> today_day;
+                data_to_time_t(today, today_t, today_year, today_mon, today_day);
+                tm nextBirthday = GetNextBirthday(today, birthday, nextBirthday_t);
+                int daysToNextBirthday = GetDaysToNextBirthday(today_t, nextBirthday_t);
+                std::cout << "今天距离下次生日还有 " << daysToNextBirthday << " 天。\n";
+            loop:
+                std::cout << "请确定您希望提前多少天做聚会计划：";
+                int n;
+                std::cin >> n;
+
+                tm planDate = GetPlanDate(nextBirthday_t, n);
+                if (IsWeekday(planDate)) {
+                    tm nearestSaturday = GetNearestSaturday(planDate);
+                    std::cout << "下次生日前 " << n << " 天是工作日，计划日期将改为 " << nearestSaturday.tm_year + 1900 << " 年 " << nearestSaturday.tm_mon + 1 << " 月 " << nearestSaturday.tm_mday << " 日（周六）。\n";
+                    planDate = nearestSaturday;
+                }
+                else {
+                    std::cout << "下次生日前 " << n << " 天是 " << planDate.tm_year + 1900 << " 年 " << planDate.tm_mon + 1 << " 月 " << planDate.tm_mday << " 日（" << (planDate.tm_wday == 0 ? "周日" : "周六") << "）。\n";
+
+                }
+                // 5. 结果显示界面        wdy
+                std::cout << "生日聚会计划的制定日期信息：\n";
+                std::cout << "亲友姓名：" << Persons[i].name << " " << "关系：" << Persons[i].relation << endl;
+                std::cout << "亲友生日：" << Persons[i].birth_year << "年" << Persons[i].birth_mon << "月" << Persons[i].birth_day << "日" << endl;
+                std::cout << "下次生日日期：" << nextBirthday.tm_year + 1900 << "年" << nextBirthday.tm_mon + 1 << "月" << nextBirthday.tm_mday << "日\n";
+                std::cout << "下次生日距离今天的天数：" << daysToNextBirthday << "天\n";
+                std::cout << "距离下次生日前" << n << "天的日期：" << planDate.tm_year + 1900 << "年" << planDate.tm_mon + 1 << "月" << planDate.tm_mday << "日\n";
+                std::cout << "预计准备制定生日计划的日期：" << planDate.tm_year + 1900 << "年" << planDate.tm_mon + 1 << "月" << planDate.tm_mday << "日\n";
+                std::cout << "重新制定计划1，为其他亲友制定计划2，退出3：";
+                k[i] = planDate;
+                int choice;
+                std::cin >> choice;
+
+                if (choice == 1) {
+                    // 返回到步骤4，重新制定计划日期
+                    std::cout << "\n";
+                    goto loop;
+                }
+                if (choice == 2) {
+                    // 返回到步骤4，重新制定计划日期
+                    std::cout << "\n";
+                    goto loop1;
+                }
+                Persons_1.push_back(Persons[i]);
+
+            }
         }
     }
 
-}
-
-/*
-int main() {
-    // 1. 欢迎界面     wdy
-    std::cout << "欢迎使用生日聚会计划便签程序！请按任意键继续。\n";
+    // 6. 结束界面
+    std::cout << "生日计划已制定的亲友：" << endl;
+    for (size_t i = 0; i < Persons_1.size(); ++i) {
+        cout << "姓名：" << Persons_1[i].name << endl;
+        cout << "关系：" << Persons_1[i].relation << endl;
+        cout << "生日：" << Persons_1[i].birth_year << "年" << Persons_1[i].birth_mon << "月" << Persons_1[i].birth_day << "日" << endl;
+        cout << "预计时间" << k[i].tm_year + 1900 << "年" << k[i].tm_mon + 1 << "月" << k[i].tm_mday << "日\n";
+    }
+    std::cout << "按任意键结束程序。\n";
     std::cin.ignore();
-
-    // 2. 输入出生日期和今天的日期      wjc
-    tm birthday, today;
-    time_t birthday_t, today_t;
-
-    std::cout << "请输入您的出生日期（年 月 日，以空格分隔）：";
-    int birth_year, birth_mon, birth_day;
-    std::cin >> birth_year >> birth_mon >> birth_day;
-    data_to_time_t(birthday, birthday_t, birth_year, birth_mon, birth_day);
-
-    std::cout << "请输入今天的日期（年 月 日，以空格分隔）：";
-    int today_year, today_mon, today_day;
-    std::cin >> today_year >> today_mon >> today_day;
-    data_to_time_t(today, today_t, today_year, today_mon, today_day);
+    std::cin.get();
 
 
-    // 3. 计算下次生日和距离今天的天数    wjc
-    time_t nextBirthday_t;
-    tm nextBirthday = GetNextBirthday(today, birthday, nextBirthday_t);
-    int daysToNextBirthday = GetDaysToNextBirthday(today_t, nextBirthday_t);
-
-    // 4. 生日聚会计划制定日期        wdy
-    std::cout << "今天距离下次生日还有 " << daysToNextBirthday << " 天。\n";
-    std::cout << "请确定您希望提前多少天做聚会计划：";
-    int n;
-    std::cin >> n;
-
-    tm planDate = GetPlanDate(nextBirthday_t, n);
-    if (IsWeekday(planDate)) {
-        tm nearestSaturday = GetNearestSaturday(planDate);
-        std::cout << "下次生日前 " << n << " 天是工作日，计划日期将改为 " << nearestSaturday.tm_year + 1900 << " 年 " << nearestSaturday.tm_mon + 1 << " 月 " << nearestSaturday.tm_mday << " 日（周六）。\n";
-        planDate = nearestSaturday;
-    }
-    else {
-        std::cout << "下次生日前 " << n << " 天是 " << planDate.tm_year + 1900 << " 年 " << planDate.tm_mon + 1 << " 月 " << planDate.tm_mday << " 日（" << (planDate.tm_wday == 0 ? "周日" : "周六") << "）。\n";
-    }
-
-    // 5. 结果显示界面        wdy
-    std::cout << "生日聚会计划的制定日期信息：\n";
-    std::cout << "下次生日日期：" << nextBirthday.tm_year + 1900 << "年" << nextBirthday.tm_mon + 1 << "月" << nextBirthday.tm_mday << "日\n";
-    std::cout << "下次生日距离今天的天数：" << daysToNextBirthday << "天\n";
-    std::cout << "距离下次生日前" << n << "天的日期：" << planDate.tm_year + 1900 << "年" << planDate.tm_mon + 1 << "月" << planDate.tm_mday << "日\n";
-    std::cout << "预计准备制定生日计划的日期：" << planDate.tm_year + 1900 << "年" << planDate.tm_mon + 1 << "月" << planDate.tm_mday << "日\n";
-
-    std::cout << "是否需要重新确定计划日期？（是/否）：";
-    std::string choice;
-    std::cin >> choice;
-
-    if (choice == "是") {
-        // 返回到步骤4，重新制定计划日期
-        std::cout << "\n";
-        main();
-    }
-    else {
-        // 6. 结束界面
-        std::cout << "生日计划已制定于：" << planDate.tm_year + 1900 << "年" << planDate.tm_mon + 1 << "月" << planDate.tm_mday << "日\n";
-        std::cout << "按任意键结束程序。\n";
-        std::cin.ignore();
-        std::cin.get();
-    }
-
-    return 0;
 }
-*/
+
