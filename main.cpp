@@ -176,6 +176,11 @@ void main_2(vector<Person>& P)
     system("pause");
 }
 
+void main_3(vector<Person>& P)
+{
+
+}
+
 int main()
 {
     vector<Person>Persons;
