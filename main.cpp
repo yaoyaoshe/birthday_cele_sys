@@ -1,6 +1,25 @@
 #include <iostream>
 #include <ctime>
+#include<string>
+using namespace std;
 #pragma warning(disable:4996);
+
+//亲友类
+class Person
+{
+public:
+    string relation;
+    int birth_year;
+    int birth_mon;
+    int birth_day;
+    tm birthday;
+    time_t birthday_t;
+    Person() {};
+    Person(string relation, int year, int mon, int day) :relation(relation), birth_year(year), birth_mon(mon), birth_day(day)
+    {
+        data_to_time_t(birthday, birthday_t, year, mon, day);
+    }
+};
 
 //函数：将tm类转换为time_t类型    wjc
 void data_to_time_t(tm& data, time_t& t, int year, int mon, int day)
