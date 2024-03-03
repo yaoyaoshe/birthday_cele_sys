@@ -11,6 +11,7 @@ void data_to_time_t(tm& data, time_t& t, int year, int mon, int day);
 class Person
 {
 public:
+    string name;
     string relation;
     int birth_year;
     int birth_mon;
@@ -18,7 +19,8 @@ public:
     tm birthday;
     time_t birthday_t;
     Person() {};
-    Person(string relation, int year, int mon, int day) :relation(relation), birth_year(year), birth_mon(mon), birth_day(day)
+    Person(string name, string relation, int year, int mon, int day) :name(name), relation(relation), birth_year(year),
+        birth_mon(mon), birth_day(day)
     {
         data_to_time_t(birthday, birthday_t, year, mon, day);
     }
@@ -45,15 +47,18 @@ void data_to_time_t(tm& data, time_t& t, int year, int mon, int day)
 //函数：获取亲友信息
 void getpersoninfo(vector<Person>& Persons)
 {
+    string name;
     string rel;
     int year;
     int mon;
     int day;
+    cout << "请输入姓名：";
+    cin >> name;
     cout << "请输入您与该亲友的关系：";
     cin >> rel;
     cout << "请输入该亲友的出生年月（年 月 日，以空格分隔）：";
     cin >> year >> mon >> day;
-    Persons.push_back(Person(rel, year, mon, day));
+    Persons.push_back(Person(name, rel, year, mon, day));
 }
 
 // 函数：获取下一个生日日期     wjc
