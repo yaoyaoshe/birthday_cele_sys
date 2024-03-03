@@ -96,6 +96,12 @@ tm GetPlanDate(const time_t& nextBirthday_t, int n) {
 
 // 函数：判断日期是否为工作日        wdy
 bool IsWeekday(const tm& date) {
+    int mon = date.tm_mon;
+    int day = date.tm_mday;
+    if ((mon == 4 && (day <= 3)) || (mon == 9 || (day <= 7)))//判断是否为五月1至3或十月1至7日
+    {
+        return false;
+    }
     int dayOfWeek = date.tm_wday;
     return (dayOfWeek > 0 && dayOfWeek < 6);
 }
