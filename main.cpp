@@ -238,12 +238,13 @@ int main()
                     std::cout << "\n";
                     goto loop;
                 }
+                Persons_1.push_back(Persons[i]);
                 if (choice == 2) {
                     // 返回到步骤4，重新制定计划日期
                     std::cout << "\n";
                     goto loop1;
                 }
-                Persons_1.push_back(Persons[i]);
+
 
             }
         }
@@ -251,7 +252,7 @@ int main()
 
     // 6. 结束界面
     std::cout << "生日计划已制定的亲友：" << endl;
-    for (size_t i = 0; i < Persons_1.size(); ++i) {
+    for (int i = 0; i < Persons_1.size(); i++) {
         cout << "姓名：" << Persons_1[i].name << endl;
         cout << "关系：" << Persons_1[i].relation << endl;
         cout << "生日：" << Persons_1[i].birth_year << "年" << Persons_1[i].birth_mon << "月" << Persons_1[i].birth_day << "日" << endl;
