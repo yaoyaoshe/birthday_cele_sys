@@ -213,11 +213,13 @@ int main()
                 tm planDate = GetPlanDate(nextBirthday_t, n);
                 if (IsWeekday(planDate)) {
                     tm nearestSaturday = GetNearestSaturday(planDate);
-                    std::cout << "下次生日前 " << n << " 天是工作日，计划日期将改为 " << nearestSaturday.tm_year + 1900 << " 年 " << nearestSaturday.tm_mon + 1 << " 月 " << nearestSaturday.tm_mday << " 日（周六）。\n";
+                    std::cout << "下次生日前 " << n << " 天是工作日，计划日期将改为 " << nearestSaturday.tm_year + 1900 << " 年 " 
+                        << nearestSaturday.tm_mon + 1 << " 月 " << nearestSaturday.tm_mday << " 日（休息日）。\n";
                     planDate = nearestSaturday;
                 }
                 else {
-                    std::cout << "下次生日前 " << n << " 天是 " << planDate.tm_year + 1900 << " 年 " << planDate.tm_mon + 1 << " 月 " << planDate.tm_mday << " 日（" << (planDate.tm_wday == 0 ? "周日" : "周六") << "）。\n";
+                    std::cout << "下次生日前 " << n << " 天是 " << planDate.tm_year + 1900 << " 年 " 
+                        << planDate.tm_mon + 1 << " 月 " << planDate.tm_mday << " 日（" << (planDate.tm_wday == 0 ? "周日" : "休息日") << "）。\n";
 
                 }
                 // 5. 结果显示界面        wdy
