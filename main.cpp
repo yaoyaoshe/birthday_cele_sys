@@ -140,7 +140,7 @@ tm GetNearestSaturday(tm& date) {
 //函数：获取庆祝日期
 void get_cele_date(Person& P, int n)
 {
-    
+
 }
 
 //函数：打印亲友信息
@@ -176,8 +176,50 @@ void main_2(vector<Person>& P)
     system("pause");
 }
 
+//查询亲友信息在数组中的位置
+bool get_person_index(vector<Person>& P, string name, int& i)
+{
+    int n = P.size();
+    for (int j = 0; j < n; j++)
+    {
+        if (P[j].name == name)
+        {
+            i = j;
+            return true;
+        }
+    }
+    return false;
+}
+
 void main_3(vector<Person>& P)
 {
+    string name;
+    cout << "请输入想要制定计划的亲友名字：" << endl;
+    cin >> name;
+    int i;
+    if (!get_person_index(P, name, i))
+    {
+        cout << "未查询到该亲友" << endl;
+        system("cls");
+        main_3(P);
+    }
+
+    cout << "请输入今天的日期（年 月 日，以空格分隔）：";
+    tm today;
+    time_t today_t;
+    int today_year, today_mon, today_day; 
+    cin >> today_year >> today_mon >> today_day; 
+    data_to_time_t(today, today_t, today_year, today_mon, today_day); 
+
+    time_t nextBirthday_t; 
+    tm nextBirthday = GetNextBirthday(today, , nextBirthday_t); 
+    int daysToNextBirthday = GetDaysToNextBirthday(today_t, nextBirthday_t);
+
+    cout << "今天距离下次生日还有 " << daysToNextBirthday << " 天。\n";
+    cout << "请确定您希望提前多少天做聚会计划：";
+    int n;
+    cin >> n;
+
 
 }
 
@@ -204,6 +246,8 @@ int main()
             main_2(Persons);
             break;
         case 3:
+            main_3(Persons);
+            break;
         case 4:return 0;
         default:
             break;
