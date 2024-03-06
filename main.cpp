@@ -169,6 +169,7 @@ void main_2(vector<Person>& P)
 {
     print_Person(P);
     system("pause");
+    system("cls");
 }
 
 //查询亲友信息在数组中的位置
@@ -200,9 +201,33 @@ struct birthday_plan
         birthday_plan_day(birthday_plan_day), distance_day(distance_day), advance_day(advance_day) {};
 };
 
+void main_4(vector<birthday_plan>& Plans)
+{
+    system("cls");
+    int n = Plans.size();
+    if (!n)
+    {
+        cout << "无已制定的计划" << endl;
+        return;
+    }
+    cout << "已制定的所有计划如下:\n";
+    for (int i = 0; i < n; i++)
+    {
+        cout << "姓名：" << Plans[i].person->name << "\t关系：" << Plans[i].person->relation << "\n距离下次生日的天数" << Plans[i].distance_day
+            << "\n预计准备生日聚会的日期：\n" << Plans[i].birthday_plan_year << "年 " << Plans[i].birthday_plan_mon << "月 "
+            << Plans[i].birthday_plan_day << "日\n";
+    }
+}
+
 void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
 {
+    cout << "是否查看亲友信息（是：1，否：0）" << endl;
+    int j;
+    cin >> j;
+    if (j)
+        main_2(P);
     string name;
+    Loop:
     cout << "请输入想要制定计划的亲友名字：" << endl;
     cin >> name;
     int i;
@@ -241,7 +266,17 @@ void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
     }
     birthday_plan this_plan(P[i], planDate.tm_year + 1900, planDate.tm_mon + 1, planDate.tm_mday, daysToNextBirthday, n);
     Plans.push_back(this_plan);
+
+    cout << "是否继续生成下一个亲友的生日计划（是：1，否：0）" << endl;
+    int k;
+    cin >> k;
+    if (k)
+    {
+        goto Loop;
+    }
+    system("pause");
 }
+
 
 int main()
 {
@@ -267,8 +302,9 @@ int main()
             break;
         case 3:
             main_3(Persons, Plans);
-            break;
-        case 4:return 0;
+        case 4:
+            main_4(Plans);
+            return 0;
         default:
             break;
         }
