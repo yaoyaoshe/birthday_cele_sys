@@ -1,6 +1,1 @@
-﻿  main.cpp
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(6,30): warning C4081: 应输入“newline”；找到“;”
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(143,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(177,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(206,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-  生日便签系统.vcxproj -> C:\VS   项目\生日便签系统\x64\Debug\生日便签系统.exe
+﻿  生日便签系统.vcxproj -> C:\VS   项目\生日便签系统\x64\Debug\生日便签系统.exe
