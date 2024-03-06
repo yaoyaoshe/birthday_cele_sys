@@ -137,12 +137,6 @@ tm GetNearestSaturday(tm& date) {
     return nearestSaturday;
 }
 
-//函数：获取庆祝日期
-void get_cele_date(Person& P, int n)
-{
-
-}
-
 //函数：打印亲友信息
 void print_Person(vector<Person>& P)
 {
@@ -167,6 +161,7 @@ void main_1(vector<Person>& Persons)
         cout << "(是请输入1，不是请输入0)\n";
         cin >> i;
     } while (i);
+    system("cls");
 }
 
 //函数：查询亲友信息
@@ -191,7 +186,21 @@ bool get_person_index(vector<Person>& P, string name, int& i)
     return false;
 }
 
-void main_3(vector<Person>& P)
+struct birthday_plan
+{
+    Person* person;
+    int birthday_plan_year;
+    int birthday_plan_mon;
+    int birthday_plan_day;
+    int distance_day;
+    int advance_day;
+    birthday_plan() {};
+    birthday_plan(Person& person, int birthday_plan_year, int birthday_plan_mon, int birthday_plan_day, int distance_day, int advance_day) :
+        person(&person), birthday_plan_year(birthday_plan_year), birthday_plan_mon(birthday_plan_mon),
+        birthday_plan_day(birthday_plan_day), distance_day(distance_day), advance_day(advance_day) {};
+};
+
+void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
 {
     string name;
     cout << "请输入想要制定计划的亲友名字：" << endl;
@@ -201,7 +210,7 @@ void main_3(vector<Person>& P)
     {
         cout << "未查询到该亲友" << endl;
         system("cls");
-        main_3(P);
+        main_3(P, Plans);
     }
 
     cout << "请输入今天的日期（年 月 日，以空格分隔）：";
@@ -212,7 +221,7 @@ void main_3(vector<Person>& P)
     data_to_time_t(today, today_t, today_year, today_mon, today_day); 
 
     time_t nextBirthday_t; 
-    tm nextBirthday = GetNextBirthday(today, , nextBirthday_t); 
+    tm nextBirthday = GetNextBirthday(today, P[i].birthday, nextBirthday_t);
     int daysToNextBirthday = GetDaysToNextBirthday(today_t, nextBirthday_t);
 
     cout << "今天距离下次生日还有 " << daysToNextBirthday << " 天。\n";
@@ -220,15 +229,26 @@ void main_3(vector<Person>& P)
     int n;
     cin >> n;
 
-
+    tm planDate = GetPlanDate(nextBirthday_t, n);
+    if (IsWeekday(planDate)) {
+        tm nearestSaturday = GetNearestSaturday(planDate);
+        std::cout << "下次生日前 " << n << " 天是工作日，计划日期将改为 " << nearestSaturday.tm_year + 1900 << " 年 " << nearestSaturday.tm_mon + 1 << " 月 " << nearestSaturday.tm_mday << " 日（周六）。\n";
+        planDate = nearestSaturday;
+    }
+    else {
+        std::cout << "下次生日前 " << n << " 天是 " << planDate.tm_year + 1900 << " 年 "
+            << planDate.tm_mon + 1 << " 月 " << planDate.tm_mday << "日（休息日）\n";
+    }
+    birthday_plan this_plan(P[i], planDate.tm_year + 1900, planDate.tm_mon + 1, planDate.tm_mday, daysToNextBirthday, n);
+    Plans.push_back(this_plan);
 }
 
 int main()
 {
     vector<Person>Persons;
+    vector<birthday_plan>Plans;
     while (1)
     {
-        system("cls");
         cout << "欢迎使用生日聚会计划便签程序！\n";
         cout << "输入亲友信息请按1\n";
         cout << "查看亲友信息请按2\n";
@@ -246,7 +266,7 @@ int main()
             main_2(Persons);
             break;
         case 3:
-            main_3(Persons);
+            main_3(Persons, Plans);
             break;
         case 4:return 0;
         default:
