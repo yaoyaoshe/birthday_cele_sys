@@ -221,18 +221,17 @@ void main_2(vector<Person>& P)
 }
 
 //查询亲友信息在数组中的位置
-bool get_person_index(vector<Person>& P, string name, int& i)
+int get_person_index(vector<Person>& P, string name, vector<int>& arr_i)
 {
     int n = P.size();
     for (int j = 0; j < n; j++)
     {
         if (P[j].name == name)
         {
-            i = j;
-            return true;
+            arr_i.push_back(j);
         }
     }
-    return false;
+    return arr_i.size();
 }
 
 struct birthday_plan
@@ -279,11 +278,39 @@ void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
     cout << "请输入想要制定计划的亲友名字：" << endl;
     cin >> name;
     int i;
-    if (!get_person_index(P, name, i))
+    vector<int>arr_i;
+    switch (get_person_index(P, name, arr_i))
     {
+    case 0:        
         cout << "未查询到该亲友" << endl;
         system("cls");
-        main_3(P, Plans);
+        goto Loop;
+        return;
+        break;
+    case 1://有且仅有一个满足
+        i = arr_i.front();
+        break;
+    default://重名
+        cout << "出现以下重名：\n";
+        int arr_i_n = arr_i.size();
+        for (int j = 0; j < arr_i_n; j++)
+        {
+            cout << j << "：姓名：" << P[arr_i[j]].name << "\t关系：" << P[arr_i[j]].relation
+                << "\t出生年月：" << P[arr_i[j]].birth_year << "年" << P[arr_i[j]].birth_mon
+                << "月" << P[arr_i[j]].birth_day << "日\n";
+        }
+        cout << "请输入想查询的对应亲属姓名前的序号" << endl;
+        int j;
+        while (1)
+        {
+            cin >> j;
+            if (0 <= j < arr_i_n)
+            {
+                i = arr_i[j];
+                break;
+            }
+            cout << "输入错误,请重新输入" << endl;
+        }
     }
 
     tm today;
