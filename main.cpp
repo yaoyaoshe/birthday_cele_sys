@@ -49,7 +49,7 @@ bool check_date(int year, int month, int day)
 {
     int monthDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    if (year < 1900)
+    if (year < 0)
     {
         cout << "年份输入错误" << endl;
         return false;
@@ -86,25 +86,27 @@ void getpersoninfo(vector<Person>& Persons)
 {
     string name;
     string rel;
-    int year;
-    int mon;
-    int day;
+
     cout << "请输入姓名：";
     cin >> name;
     cout << "请输入您与该亲友的关系：";
     cin >> rel;
     cout << "请输入该亲友的出生年月（年 月 日，以空格分隔）：";
-    cin >> year >> mon >> day;
     
-    do {
+    while (1)
+    {
+        int year;
+        int mon;
+        int day;
+        cin >> year >> mon >> day;
         if (check_date(year, mon, day))
         {
             Persons.push_back(Person(name, rel, year, mon, day));
             break;
         }
+        system("pause");
         cout << "请输入该亲友的出生年月（年 月 日，以空格分隔）：";
-        cin >> year >> mon >> day;
-    } while (1);
+        }
 
 }
 

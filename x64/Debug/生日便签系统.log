@@ -1,9 +1,9 @@
 ﻿  main.cpp
 C:\VS   项目\生日便签系统\生日便签系统\main.cpp(6,30): warning C4081: 应输入“newline”；找到“;”
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(190,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(226,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(234,22): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(254,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(295,21): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\VS   项目\生日便签系统\生日便签系统\main.cpp(307,19): warning C4804: “<”: 在操作中使用类型“bool”不安全
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(192,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(228,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(236,22): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(256,11): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(297,21): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\VS   项目\生日便签系统\生日便签系统\main.cpp(309,19): warning C4804: “<”: 在操作中使用类型“bool”不安全
   生日便签系统.vcxproj -> C:\VS   项目\生日便签系统\x64\Debug\生日便签系统.exe
