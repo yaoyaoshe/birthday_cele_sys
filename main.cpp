@@ -169,7 +169,6 @@ void main_2(vector<Person>& P)
 {
     print_Person(P);
     system("pause");
-    system("cls");
 }
 
 //查询亲友信息在数组中的位置
