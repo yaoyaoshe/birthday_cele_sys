@@ -226,7 +226,7 @@ void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
     if (j)
         main_2(P);
     string name;
-    Loop:
+  Loop:
     cout << "请输入想要制定计划的亲友名字：" << endl;
     cin >> name;
     int i;
@@ -264,6 +264,15 @@ void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
             << planDate.tm_mon + 1 << " 月 " << planDate.tm_mday << "日（休息日）\n";
     }
     birthday_plan this_plan(P[i], planDate.tm_year + 1900, planDate.tm_mon + 1, planDate.tm_mday, daysToNextBirthday, n);
+
+    cout << "是否重新为该亲友生成计划（是：1，否：0）" << endl;
+    int i_1;
+    cin >> i_1;
+    if (i_1)
+    {
+        goto Loop;
+    }
+
     Plans.push_back(this_plan);
 
     cout << "是否继续生成下一个亲友的生日计划（是：1，否：0）" << endl;
