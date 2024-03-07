@@ -44,6 +44,43 @@ void data_to_time_t(tm& data, time_t& t, int year, int mon, int day)
     return;
 }
 
+//判断输入日期是否正确        // https://blog.csdn.net/wcc15256945095/article/details/123852026
+bool check_date(int year, int month, int day)
+{
+    int monthDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    if (year < 1900)
+    {
+        cout << "年份输入错误" << endl;
+        return false;
+    }
+
+    if (month < 1 || month > 12)
+    {
+        cout << "月份输入错误" << endl;
+        return false;
+    }
+
+    if (month == 2)
+    {
+        // 判断如果是闰年,则修改二月的monthDays[1]值为29
+        if ((year % 400 == 0) || \
+            (year % 100 != 0 && year % 4 == 0)
+            )
+        {
+            monthDays[1] = 29;
+        }
+    }
+
+    if (day < 1 || day > monthDays[month - 1])
+    {
+        cout << "日期输入错误" << endl;
+        return false;
+    }
+
+    return true;
+}
+
 //函数：获取亲友信息
 void getpersoninfo(vector<Person>& Persons)
 {
@@ -58,7 +95,17 @@ void getpersoninfo(vector<Person>& Persons)
     cin >> rel;
     cout << "请输入该亲友的出生年月（年 月 日，以空格分隔）：";
     cin >> year >> mon >> day;
-    Persons.push_back(Person(name, rel, year, mon, day));
+    
+    do {
+        if (check_date(year, mon, day))
+        {
+            Persons.push_back(Person(name, rel, year, mon, day));
+            break;
+        }
+        cout << "请输入该亲友的出生年月（年 月 日，以空格分隔）：";
+        cin >> year >> mon >> day;
+    } while (1);
+
 }
 
 // 函数：获取下一个生日日期     wjc
@@ -149,6 +196,8 @@ void print_Person(vector<Person>& P)
     }
 }
 
+
+
 //函数：录入亲友信息
 void main_1(vector<Person>& Persons)
 {
@@ -237,16 +286,35 @@ void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
         main_3(P, Plans);
     }
 
-    cout << "请输入今天的日期（年 月 日，以空格分隔）：";
     tm today;
     time_t today_t;
     int today_year, today_mon, today_day; 
+    cout << "请输入今天的日期（年 月 日，以空格分隔）：";
     cin >> today_year >> today_mon >> today_day; 
-    data_to_time_t(today, today_t, today_year, today_mon, today_day); 
-
-    time_t nextBirthday_t; 
-    tm nextBirthday = GetNextBirthday(today, P[i].birthday, nextBirthday_t);
-    int daysToNextBirthday = GetDaysToNextBirthday(today_t, nextBirthday_t);
+    time_t nextBirthday_t;
+    tm nextBirthday;
+    int daysToNextBirthday;
+    do
+    {
+        if (check_date(today_year, today_mon, today_day))
+        {
+            //判断输入日期是否合法
+            data_to_time_t(today, today_t, today_year, today_mon, today_day);
+            //判断输入的今天日期是否小于生日
+            if (today_t > P[i].birthday_t)
+            {
+                nextBirthday = GetNextBirthday(today, P[i].birthday, nextBirthday_t);
+                daysToNextBirthday = GetDaysToNextBirthday(today_t, nextBirthday_t);
+                break;
+            }
+            else
+            {
+                cout << "输入的今天日期大于该亲友生日" << endl;
+            }
+        }
+        cout << "请重新输入今天的日期（年 月 日，以空格分隔）：";
+        cin >> today_year >> today_mon >> today_day;
+    } while (true);
 
     cout << "今天距离下次生日还有 " << daysToNextBirthday << " 天。\n";
     cout << "请确定您希望提前多少天做聚会计划：";
