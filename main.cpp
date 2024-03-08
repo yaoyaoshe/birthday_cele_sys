@@ -348,7 +348,17 @@ void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
     cout << "今天距离下次生日还有 " << daysToNextBirthday << " 天。\n";
     cout << "请确定您希望提前多少天做聚会计划：";
     int n;
-    cin >> n;
+    while (true)
+    {
+        cin >> n;
+        if (n >= 0) {
+            break;
+        }
+        else
+        {
+            cout << "输入错误，请重新输入n:" << endl;
+        }
+    }
 
     tm planDate = GetPlanDate(nextBirthday_t, n);
     if (IsWeekday(planDate)) {
