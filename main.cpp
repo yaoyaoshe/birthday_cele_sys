@@ -49,7 +49,7 @@ bool check_date(int year, int month, int day)
 {
     int monthDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    if (year < 0)
+    if (year < 1900)
     {
         cout << "Äê·ÝÊäÈë´íÎó" << endl;
         return false;
