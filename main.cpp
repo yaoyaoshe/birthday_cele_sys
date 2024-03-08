@@ -338,7 +338,7 @@ void main_3(vector<Person>& P, vector<birthday_plan>& Plans)
             }
             else
             {
-                cout << "输入的今天日期大于该亲友生日" << endl;
+                cout << "输入的今天日期晚于该亲友生日" << endl;
             }
         }
         cout << "请重新输入今天的日期（年 月 日，以空格分隔）：";
